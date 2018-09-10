@@ -19,17 +19,17 @@ with open(csvpath, newline="") as csvfile:
     for row in csvreader:
         
         votes = votes + 1
-        total
+        total_candidates
         
-        if row[3] not in candidates:
-            candidates.append(row[3])
-            candidate_votes[row[3]] = 1
+        if row[2] not in candidates:
+            candidates.append(row[2])
+            candidate_votes[row[2]] = 1
         else:
-            candidate_votes[row[3]] = candidate_votes[row[3]] + 1
+            candidate_votes[row[2]] = candidate_votes[row[2]] + 1
 
     print("Election Results")
     print("-----------------------------------")
-    print("Total Votes:", len(votes))
+    print("Total Votes:", str(votes))
     print("-----------------------------------")
     
 
@@ -37,11 +37,12 @@ with open(csvpath, newline="") as csvfile:
         print(candidate + " " + str(round(((candidate_votes[candidate]/votes) * 100))) + "%" + " (" + str(candidate_votes[candidate]) + ")")
         candidate_results = (candidate + " " + str(round(((candidate_votes[candidate]/votes) *100))) + "%" + " (" + str(candidate_votes[candidate]) + ")")
 
-    winner = sorted(candidate_votes.items(), key=itemgetter(1), reverse=True)
+    winner = max(candidates,key=candidates.count)
 
     print("-----------------------------------")
-    print("Winner: " + str(winner[0]))
+    print("Winner: " + str(winner))
     print("-----------------------------------")
+
 
 with open(output, "w") as txt_file:
     
